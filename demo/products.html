@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Vishal Engineering Works</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #f4f4f4;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 900px;
+            margin: 50px auto;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .modal-images {
+            padding: 30px;
+            background: #f8f9fa;
+        }
+
+        .main-image-modal {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .thumbnail {
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+        .modal-details {
+            padding: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+
+        .nav-bar {
+            background: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #1e3c72;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(30, 60, 114, 0.9), rgba(30, 60, 114, 0.9)), url('hero-bg.jpg');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 150px 20px 100px;
+            margin-bottom: 50px;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5em;
+            margin: 0;
+            margin-bottom: 20px;
+        }
+
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 50px 0;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 450px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            margin: 0;
+            color: #1e3c72;
+            font-size: 1.5em;
+        }
+
+        .product-info p {
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 60, 114, 0.95);
+            color: white;
+            padding: 30px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .product-card:hover .product-overlay {
+            transform: translateY(0);
+        }
+
+        .overlay-content h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .specs-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .specs-list li {
+            margin-bottom: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .specs-list li:before {
+            content: '•';
+            color: white;
+        }
+
+        .enquiry-btn {
+            display: inline-block;
+            background: white;
+            color: #1e3c72;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .enquiry-btn:hover {
+            transform: translateY(-2px);
+            background: #f0f0f0;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="products.html" class="active">Products</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <h1>Our Products</h1>
+        <p>Discover our range of high-quality industrial solutions</p>
+    </div>
+
+    <div class="products-container">
+        <div class="products-grid">
+            <!-- PCC Panel -->
+            <!-- Modify product card to have click event -->
+            <div class="product-card" onclick="openModal('pcc')">
+                <div class="product-image">
+                    <img src="pcc-panel.jpg" alt="PCC Panel">
+                </div>
+                <div class="product-info">
+                    <h3>Power Control Center Panels</h3>
+                    <p>Advanced PCC panels for industrial power distribution.</p>
+                    <ul>
+                        <li>High-grade components</li>
+                        <li>Customizable configurations</li>
+                        <li>Enhanced safety features</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Add this modal structure before closing body tag -->
+            <div id="productModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal()">&times;</span>
+                    <div id="modalContent"></div>
+                </div>
+            </div>
+
+            <!-- Add this script before closing body tag -->
+            <script>
+                function openModal(productId) {
+                    const modal = document.getElementById('productModal');
+                    const modalContent = document.getElementById('modalContent');
+                    
+                    const products = {
+                        'pcc': {
+                            title: 'Power Control Center Panels',
+                            description: 'State-of-the-art PCC panels designed for optimal power distribution and control in industrial settings.',
+                            specs: [
+                                'Voltage Rating: 415V AC, 50Hz',
+                                'Protection Class: IP54/IP55',
+                                'Material: CRCA Sheet Steel',
+                                'Finish: Powder Coated',
+                                'Standards: IEC 61439-1/2',
+                                'Operating Temperature: 0°C to 50°C'
+                            ],
+                            features: [
+                                'Advanced circuit protection',
+                                'Modular design for maintenance',
+                                'High-quality switchgear',
+                                'Temperature monitoring',
+                                'Emergency shutdown system'
+                            ]
+                        },
+                        'db': {
+                            title: 'Distribution Boards',
+                            description: 'Advanced distribution boards for efficient power management in commercial and industrial settings.',
+                            specs: [
+                                'Voltage: 230V/415V AC',
+                                'Protection: IP42/IP54',
+                                'Mounting: Surface/Flush',
+                                'Material: Sheet Steel',
+                                'Circuit Capacity: 4-36 Ways',
+                                'Standards: IEC 61439-3'
+                            ],
+                            features: [
+                                'Multiple circuit protection',
+                                'Compact design',
+                                'Easy installation',
+                                'RCCB/MCCB options',
+                                'Surge protection'
+                            ]
+                        },
+                        'apfc': {
+                            title: 'APFC Panels',
+                            description: 'Intelligent power factor correction systems for optimal energy efficiency.',
+                            specs: [
+                                'Power Rating: Up to 500 KVAR',
+                                'Voltage: 415V ±10%',
+                                'Frequency: 50Hz ±5%',
+                                'Response Time: 10-20ms',
+                                'Display: Digital LCD',
+                                'Power Factor: 0.99'
+                            ],
+                            features: [
+                                'Automatic power factor correction',
+                                'Real-time monitoring',
+                                'Harmonic filtering',
+                                'Energy saving operation',
+                                'Overload protection'
+                            ]
+                        },
+                        'mcc': {
+                            title: 'Motor Control Center',
+                            description: 'Centralized control solution for multiple motor applications with advanced protection features.',
+                            specs: [
+                                'Voltage: 415V AC',
+                                'Protection: IP54',
+                                'Control: Digital/Manual',
+                                'Starter Types: DOL/Star-Delta',
+                                'Busbar Rating: Up to 6300A',
+                                'Form: Form 3b, 4a, 4b'
+                            ],
+                            features: [
+                                'Integrated motor protection',
+                                'Modular construction',
+                                'Easy maintenance access',
+                                'Remote operation capability',
+                                'Status indication'
+                            ]
+                        },
+                        'amf': {
+                            title: 'AMF Control Panels',
+                            description: 'Automatic mains failure panels for seamless power backup switching.',
+                            specs: [
+                                'Operating Voltage: 230V/415V',
+                                'Frequency: 50/60Hz',
+                                'Transfer Time: <1 second',
+                                'Controller: Microprocessor',
+                                'Display: LCD/LED',
+                                'Protection: IP55'
+                            ],
+                            features: [
+                                'Auto/Manual operation',
+                                'Generator protection',
+                                'Mains monitoring',
+                                'Engine monitoring',
+                                'Emergency stop'
+                            ]
+                        },
+                        'vfd': {
+                            title: 'VFD Panels',
+                            description: 'Variable frequency drive panels for precise motor speed control and energy efficiency.',
+                            specs: [
+                                'Power Range: 0.75-500 kW',
+                                'Input: 380-480V AC',
+                                'Frequency: 0-400 Hz',
+                                'Protection: IP54/IP55',
+                                'Control: PID/PLC',
+                                'Efficiency: >97%'
+                            ],
+                            features: [
+                                'Speed control',
+                                'Energy saving',
+                                'Soft start/stop',
+                                'Overload protection',
+                                'Parameter monitoring'
+                            ]
+                        },
+                        'sync': {
+                            title: 'Synchronization Panels',
+                            description: 'Advanced solutions for generator synchronization and load sharing.',
+                            specs: [
+                                'Voltage Range: 380-440V',
+                                'Frequency: 50/60Hz',
+                                'Phase Angle: ±10°',
+                                'Sync Time: 2-20s',
+                                'Protection: IP54',
+                                'Controller: Digital'
+                            ],
+                            features: [
+                                'Auto synchronization',
+                                'Load sharing control',
+                                'Generator protection',
+                                'Real-time monitoring',
+                                'Emergency shutdown'
+                            ]
+                        },
+                        'lt': {
+                            title: 'LT Panels',
+                            description: 'Low tension distribution panels for reliable power management.',
+                            specs: [
+                                'Voltage: Up to 1000V',
+                                'Current: Up to 6300A',
+                                'Protection: IP54',
+                                'Bus Bar: Copper/Aluminum',
+                                'Form: Form 3b/4b',
+                                'Standards: IEC 61439'
+                            ],
+                            features: [
+                                'Short circuit protection',
+                                'Overload protection',
+                                'Earth fault protection',
+                                'Metering facility',
+                                'Easy maintenance'
+                            ]
+                        },
+                        'ht': {
+                            title: 'HT Panels',
+                            description: 'High tension switchgear panels for reliable power distribution.',
+                            specs: [
+                                'Voltage: Up to 33kV',
+                                'Current: Up to 2500A',
+                                'Protection: IP4X',
+                                'Standards: IEC 62271',
+                                'Insulation: SF6/Vacuum',
+                                'Operation: Indoor/Outdoor'
+                            ],
+                            features: [
+                                'Advanced protection relay',
+                                'Safety interlocks',
+                                'Remote operation',
+                                'Arc flash protection',
+                                'Condition monitoring'
+                            ]
+                        }
+                    };
+                    
+                    if(products[productId]) {
+                        const product = products[productId];
+                        modalContent.innerHTML = `
+                            <div class="modal-grid">
+                                <div class="modal-images">
+                                    <img src="${productId}-panel.jpg" alt="${product.title}" class="main-image-modal">
+                                    <div class="thumbnail-grid">
+                                        <img src="${productId}-detail1.jpg" alt="Detail 1" class="thumbnail">
+                                        <img src="${productId}-detail2.jpg" alt="Detail 2" class="thumbnail">
+                                        <img src="${productId}-detail3.jpg" alt="Detail 3" class="thumbnail">
+                                    </div>
+                                </div>
+                                <div class="modal-details">
+                                    <h2>${product.title}</h2>
+                                    <p>${product.description}</p>
+                                    
+                                    <h3>Technical Specifications</h3>
+                                    <ul class="specs-list">
+                                        ${product.specs.map(spec => `<li>${spec}</li>`).join('')}
+                                    </ul>
+
+                                    <h3>Key Features</h3>
+                                    <ul class="specs-list">
+                                        ${product.features.map(feature => `<li>${feature}</li>`).join('')}
+                                    </ul>
+
+                                    <a href="contact.html?product=${productId}" class="enquiry-btn">Make an Enquiry</a>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    modal.style.display = 'block';
+                }
+            </script>
+
+            <!-- Distribution Board -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="distribution-board.jpg" alt="Distribution Board">
+                </div>
+                <div class="product-info">
+                    <h3>Distribution Boards</h3>
+                    <p>Efficient power distribution solutions.</p>
+                    <ul>
+                        <li>Multiple circuit options</li>
+                        <li>Compact design</li>
+                        <li>Easy installation</li>
+                    </ul>
+                </div>
+                <div class="product-overlay">
+                    <div class="overlay-content">
+                        <h3>Distribution Boards</h3>
+                        <p>Advanced distribution boards for efficient power management in commercial and industrial settings.</p>
+                        <h4>Technical Specifications:</h4>
+                        <ul class="specs-list">
+                            <li>Voltage: 230V/415V AC</li>
+                            <li>Protection: IP42/IP54</li>
+                            <li>Mounting: Surface/Flush</li>
+                            <li>Material: Sheet Steel</li>
+                            <li>Circuit Capacity: 4-36 Ways</li>
+                        </ul>
+                        <a href="contact.html?product=db" class="enquiry-btn">Make an Enquiry</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APFC Panel -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="apfc-panel.jpg" alt="APFC Panel">
+                </div>
+                <div class="product-info">
+                    <h3>APFC Panels</h3>
+                    <p>Automatic power factor correction solutions.</p>
+                    <ul>
+                        <li>Real-time monitoring</li>
+                        <li>Energy efficient</li>
+                        <li>Smart controls</li>
+                    </ul>
+                </div>
+                <div class="product-overlay">
+                    <div class="overlay-content">
+                        <h3>APFC Panels</h3>
+                        <p>Intelligent power factor correction systems for optimal energy efficiency.</p>
+                        <h4>Technical Specifications:</h4>
+                        <ul class="specs-list">
+                            <li>Power Rating: Up to 500 KVAR</li>
+                            <li>Voltage: 415V ±10%</li>
+                            <li>Frequency: 50Hz ±5%</li>
+                            <li>Response Time: 10-20ms</li>
+                            <li>Display: Digital LCD</li>
+                        </ul>
+                        <a href="contact.html?product=apfc" class="enquiry-btn">Make an Enquiry</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more product cards with similar structure -->
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishal Engineering Works - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #f4f4f4;
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            background: linear-gradient(rgba(30, 60, 114, 0.9), rgba(30, 60, 114, 0.9)), url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 200px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '⚙️';
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.1;
+            top: 50%;
+            left: -100px;
+            transform: translateY(-50%);
+            animation: floatGear 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '🔧';
+            position: absolute;
+            font-size: 180px;
+            opacity: 0.1;
+            top: 30%;
+            right: -80px;
+            transform: translateY(-50%);
+            animation: floatTool 7s ease-in-out infinite;
+        }
+
+        .hero h2 {
+            font-size: 4.5em;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            animation: glowText 2s ease-in-out infinite;
+            background: linear-gradient(45deg, #ffffff, #a3c2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255,255,255,0.3);
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            margin: 30px 0;
+            opacity: 0;
+            animation: slideUp 1s ease 0.5s forwards;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        @keyframes glowText {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes floatGear {
+            0%, 100% { transform: translateY(-50%) rotate(0deg); }
+            50% { transform: translateY(-40%) rotate(180deg); }
+        }
+
+        @keyframes floatTool {
+            0%, 100% { transform: translateY(-50%) rotate(0deg); }
+            50% { transform: translateY(-60%) rotate(-45deg); }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .hero h2 {
+            font-size: 3em;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin: 20px 0;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            color: #1e3c72;
+            margin-bottom: 20px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            color: #1e3c72;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Services Preview */
+        .services-preview {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .service-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .service-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 20px;
+            color: white;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #1e3c72;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 2em;
+            }
+        }
+        
+        /* Add these new styles */
+        /* Update logo container and animation */
+        /* Update logo container styles */
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-container img {
+            width: 80px;
+            height: auto;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Remove the shimmer effect and hover transform for stability */
+        .logo-container:hover {
+            transform: none;
+        }
+
+        .logo-container::before {
+            display: none;
+        }
+
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(30, 60, 114, 0.1) 45%, rgba(30, 60, 114, 0.1) 55%, transparent 60%);
+            animation: shimmer 3s infinite;
+            border-radius: 12px;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(30, 60, 114, 0.2);
+        }
+
+        .logo-container img {
+            width: 100px;
+            height: auto;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Enhanced intro animation */
+        .intro-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 1s ease-in-out 4s forwards;
+        }
+
+        .intro-text {
+            color: white;
+            font-size: 4em;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            opacity: 0;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            animation: textReveal 2s ease-in-out forwards;
+            position: relative;
+        }
+
+        .intro-text::before {
+            content: '⚙️';
+            position: absolute;
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: spinGear 2s linear infinite;
+        }
+
+        .intro-text::after {
+            content: '⚙️';
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%) rotate(30deg);
+            animation: spinGearReverse 2s linear infinite;
+        }
+
+        @keyframes spinGear {
+            from { transform: translateY(-50%) rotate(0deg); }
+            to { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        @keyframes spinGearReverse {
+            from { transform: translateY(-50%) rotate(30deg); }
+            to { transform: translateY(-50%) rotate(-330deg); }
+        }
+        .quote-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin: 60px 0;
+        }
+
+        .quote-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-text {
+            font-size: 2em;
+            color: #1e3c72;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .quote-author {
+            color: #2a5298;
+            font-size: 1.2em;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            padding-top: 20px;
+        }
+
+        .quote-author::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: #1e3c72;
+        }
+
+        .quote-decoration {
+            font-family: 'Georgia', serif;
+            font-size: 180px;
+            color: rgba(30, 60, 114, 0.05);
+            position: absolute;
+            line-height: 1;
+            z-index: 0;
+        }
+
+        .quote-left {
+            left: 30px;
+            top: 30px;
+        }
+
+        .quote-right {
+            right: 30px;
+            bottom: -30px;
+            transform: rotate(180deg);
+        }
+ 
+            /* Add these new styles */
+            .intro-animation {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #1e3c72;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+                animation: fadeOut 1s ease-in-out 3s forwards;
+            }
+        
+            .intro-text {
+                color: white;
+                font-size: 3.5em;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 700;
+                opacity: 0;
+                animation: textReveal 2s ease-in-out forwards;
+            }
+        
+            @keyframes textReveal {
+                0% { opacity: 0; transform: translateY(30px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+        
+            @keyframes fadeOut {
+                to { opacity: 0; visibility: hidden; }
+            }
+        
+            /* Update navigation styles */
+            .main-nav {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                z-index: 100;
+                padding: 20px 0;
+                backdrop-filter: blur(10px);
+            }
+        
+            .nav-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 20px;
+            }
+        
+            .nav-links {
+                display: flex;
+                gap: 40px;
+            }
+        
+            .nav-links a {
+                color: #1e3c72;
+                text-decoration: none;
+                font-weight: 600;
+                padding: 12px 25px;
+                border-radius: 30px;
+                transition: all 0.4s ease;
+                font-size: 16px;
+                letter-spacing: 0.5px;
+                position: relative;
+                border: 2px solid transparent;
+            }
+        
+            .nav-links a:hover {
+                background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+                color: white;
+                transform: translateY(-2px);
+                border-color: #ff6b00;
+                box-shadow: 0 0 15px rgba(255, 107, 0, 0.3);
+            }
+        
+            .nav-links a.active {
+                background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+                color: white;
+                box-shadow: 0 4px 15px rgba(30, 60, 114, 0.2);
+                border: 2px solid #ff6b00;
+                animation: strokePulse 2s infinite;
+            }
+
+            @keyframes strokePulse {
+                0% { border-color: rgba(255, 107, 0, 1); }
+                50% { border-color: rgba(255, 107, 0, 0.4); }
+                100% { border-color: rgba(255, 107, 0, 1); }
+            }
+        
+            /* Update intro animation */
+            .intro-animation {
+                background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            }
+        
+            .intro-text {
+                font-size: 4em;
+                letter-spacing: 2px;
+                text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            }
+        </style>
+</head>
+<body>
+    <!-- Include your header here -->
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Excellence in Engineering</h2>
+            <p>ISO 9001:2015 Certified Manufacturing Solutions</p>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏭</div>
+                <h3>Quality Manufacturing</h3>
+                <p>State-of-the-art facilities ensuring precision and excellence</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>Custom Solutions</h3>
+                <p>Tailored engineering solutions for your specific needs</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3>Expert Team</h3>
+                <p>Skilled professionals with years of industry experience</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>About Vishal Engineering Works</h2>
+                <p>With over two decades of experience, we specialize in precision engineering and quality manufacturing solutions. Our state-of-the-art facility in Mumbai serves clients across various industries.</p>
+                <p>We pride ourselves on our commitment to quality, innovation, and customer satisfaction.</p>
+            </div>
+            <div class="about-image">
+                <img src="m4.JPG" alt="Our Facility">
+            </div>
+        </div>
+    </section>
+
+    <section class="services-preview">
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="m1.JPG" alt="Sheet Metal Fabrication">
+                <div class="service-overlay">
+                    <h3>Sheet Metal Fabrication</h3>
+                    <p>Precision fabrication services</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="m2.JPG" alt="Sheet Metal Enclosures">
+                <div class="service-overlay">
+                    <h3>Sheet Metal Enclosures</h3>
+                    <p>Custom enclosure solutions</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="m3.JPG" alt="CNC Job Works">
+                <div class="service-overlay">
+                    <h3>CNC Job Works</h3>
+                    <p>Advanced machining capabilities</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to Start Your Project?</h2>
+        <p>Contact us today for a consultation</p>
+        <a href="contact.html" class="cta-btn">Get in Touch</a>
+    </section>
+
+    <!-- Include your footer here -->
+
+    <div class="logo-container">
+            <img src="logo.JPG" alt="Vishal Engineering Works - Gear shaped logo with VW text">
+        </div>
+    
+        <!-- Add this section after the features section -->
+        <section class="quote-section">
+            <div class="quote-decoration quote-left">"</div>
+            <div class="quote-content">
+                <p class="quote-text">
+                    "Engineering excellence is not just about creating solutions; it's about crafting reliability, precision, and trust in every piece we manufacture."
+                </p>
+                <p class="quote-author">- Vishal Engineering Works</p>
+            </div>
+            <div class="quote-decoration quote-right">"</div>
+        </section>
+
+        
+
+        <!-- Update navigation structure -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="nav-links">
+                    <a href="main.html" class="active">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="services.html">Services</a>
+                    <a href="products.html">Products</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Add this script before closing body tag -->
+        <script>
+            // Highlight active navigation item
+            document.addEventListener('DOMContentLoaded', function() {
+                const currentPage = window.location.pathname.split('/').pop();
+                const navLinks = document.querySelectorAll('.nav-links a');
+                
+                navLinks.forEach(link => {
+                    if(link.getAttribute('href') === currentPage) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        </script>
+</body>
+</html>

@@ -1,0 +1,731 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Vishal Engineering Works</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .main-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #1e3c72;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 70%, #3a62b8 100%);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+            animation: pageLoad 1.2s ease-out;
+        }
+
+        .hero-section::before {
+            content: '📚';  /* Changed from gear to book */
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.1;
+            top: 50%;
+            left: -100px;
+            transform: translateY(-50%);
+            animation: floatGear 8s ease-in-out infinite;
+            color: white;
+        }
+
+        .hero-section::after {
+            content: '🏢';  /* Changed from wrench to building */
+            position: absolute;
+            font-size: 180px;
+            opacity: 0.1;
+            top: 30%;
+            right: -80px;
+            transform: translateY(-50%);
+            animation: floatTool 7s ease-in-out infinite;
+            color: white;
+        }
+
+        @keyframes floatGear {
+            0%, 100% { 
+                transform: translateY(-50%) rotate(0deg); 
+            }
+            50% { 
+                transform: translateY(-40%) rotate(180deg); 
+            }
+        }
+
+        @keyframes floatTool {
+            0%, 100% { 
+                transform: translateY(-50%) rotate(0deg); 
+            }
+            50% { 
+                transform: translateY(-60%) rotate(-45deg); 
+            }
+        }
+        .background-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .background-elements::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .wrench-icon {
+            position: absolute;
+            right: 5%;
+            top: 20%;
+            width: 150px;
+            height: 150px;
+            opacity: 0.15;
+            background: url('wrench.svg') no-repeat center/contain;
+            animation: wrenchFloat 8s ease-in-out infinite;
+            filter: brightness(2);
+        }
+
+        .gear-large {
+            position: absolute;
+            left: -50px;
+            bottom: 10%;
+            width: 200px;
+            height: 200px;
+            opacity: 0.2;
+            background: url('gear.svg') no-repeat center/contain;
+            animation: rotateLarge 20s linear infinite;
+            filter: brightness(2);
+        }
+
+        .gear-small {
+            position: absolute;
+            right: 15%;
+            bottom: 30%;
+            width: 100px;
+            height: 100px;
+            opacity: 0.18;
+            background: url('gear.svg') no-repeat center/contain;
+            animation: rotateSmall 15s linear infinite reverse;
+            filter: brightness(2);
+        }
+
+        .logo-container {
+            position: fixed;
+            left: 20px;
+            top: 15px;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 1001;
+            border: 2px solid rgba(30, 60, 114, 0.1);
+            animation: logoEntrance 1s ease-out;
+        }
+
+        .logo-container img {
+            width: 80px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 4em;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            margin-top: 20px;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 40px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            color: #1e3c72;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #1e3c72;
+            font-size: 2.5em;
+            margin: 40px 0;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .service-item {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .value-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .story-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .story-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .story-image {
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+            transition: transform 0.3s ease;
+        }
+
+        .story-content {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .story-content h3 {
+            color: #1e3c72;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .story-content p {
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .achievement-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+        }
+
+        .achievement-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .achievement-card h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #1e3c72;
+        }
+
+        .achievement-card:hover h4 {
+            color: white;
+        }
+
+        .achievement-card p {
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .leadership-section {
+            padding: 60px 0;
+            background: #f8f9fa;
+        }
+
+        .leaders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .leader-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .leader-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .leader-info h3 {
+            color: #1e3c72;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .leader-info h4 {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .leader-description {
+            text-align: justify;
+            line-height: 1.6;
+            color: #444;
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 60px;
+        }
+
+        @keyframes wrenchFloat {
+            0% { transform: rotate(-15deg) translateY(0); }
+            50% { transform: rotate(5deg) translateY(-20px); }
+            100% { transform: rotate(-15deg) translateY(0); }
+        }
+
+        @keyframes rotateLarge {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateSmall {
+            from { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            to { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes logoEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.5);
+            }
+            50% {
+                transform: translateY(10px) scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes pageLoad {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .story-card {
+                flex-direction: column;
+            }
+
+            .story-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="main.html">Home</a>
+                <a href="about.html" class="active">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="products.html">Products</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <div class="background-elements">
+            <div class="wrench-icon"></div>
+            <div class="gear-large"></div>
+            <div class="gear-small"></div>
+            <div class="accent-line"></div>
+        </div>
+        <div class="logo-container">
+            <img src="logo.JPG" alt="Vishal Engineering Works Logo">
+        </div>
+        <div class="hero-content">
+            <h1>Excellence in Engineering</h1>
+            <p class="subtitle">ISO 9001:2015 CERTIFIED MANUFACTURING SOLUTIONS</p>
+            <div class="hero-badges">
+                <span class="badge">Since 1996</span>
+                <span class="badge">Quality Assured</span>
+                <span class="badge">Innovation Driven</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">27+</div>
+                    <p>Years of Excellence</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">ISO</div>
+                    <p>9001:2015 Certified</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <p>Industry Sectors</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <p>Quality Assurance</p>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2 class="section-title">Who We Are</h2>
+                <p class="intro-text">Vishal Engineering Works stands as a beacon of engineering excellence, pioneering innovative manufacturing solutions since 1996. As an ISO 9001:2015 certified organization, we have established ourselves as a trusted leader in precision engineering, metal fabrication, and custom manufacturing solutions. Our state-of-the-art facility, coupled with decades of expertise, enables us to deliver superior quality products that meet the most demanding industry standards.</p>
+
+                <!-- Update font imports -->
+                <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+                <style>
+                    body {
+                        font-family: 'Inter', sans-serif;
+                    }
+
+                    h1, h2, h3, h4, .nav-links a {
+                        font-family: 'Poppins', sans-serif;
+                    }
+
+                    .hero-content h1 {
+                        font-size: 4.5em;
+                        line-height: 1.2;
+                        letter-spacing: -0.5px;
+                    }
+
+                    .intro-text {
+                        font-size: 1.2em;
+                        line-height: 1.8;
+                        color: #444;
+                        max-width: 900px;
+                        margin: 0 auto 40px;
+                        text-align: center;
+                    }
+
+                    .service-item {
+                        font-size: 1.1em;
+                        line-height: 1.6;
+                        padding: 20px 25px;
+                    }
+
+                    .value-card p {
+                        font-size: 1.1em;
+                        line-height: 1.7;
+                    }
+
+                    .story-content p {
+                        font-size: 1.15em;
+                        line-height: 1.8;
+                        max-width: 800px;
+                        margin: 0 auto;
+                    }
+
+                    .leader-description p {
+                        font-size: 1.1em;
+                        line-height: 1.8;
+                        margin-bottom: 25px;
+                    }
+                </style>
+            </div>
+
+            <div class="values-section">
+                <h2 class="section-title">Our Core Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">🎯</div>
+                        <h3>Customer Satisfaction</h3>
+                        <p>Delivering top-quality solutions tailored to client needs</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">⏰</div>
+                        <h3>On-Time Delivery</h3>
+                        <p>Efficient production planning ensuring timely execution</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🔧</div>
+                        <h3>Advanced Technology</h3>
+                        <p>Cutting-edge CNC and metal processing techniques</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">💡</div>
+                        <h3>Continuous Innovation</h3>
+                        <p>Constant improvement for cost-effective solutions</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Our Story</h2>
+            <div class="story-container">
+                <div class="story-card">
+                    <div class="story-image">
+                        <img src="m4.JPG" alt="Our Factory">
+                    </div>
+                    <div class="story-content">
+                        <h3>From Vision to Reality</h3>
+                        <p>Starting in 1996 with a small workshop, we've grown into a leading manufacturer of precision engineering components. Our journey has been marked by continuous innovation, technological advancement, and unwavering commitment to quality.</p>
+                    </div>
+                </div>
+                <div class="achievement-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🏆</div>
+                        <h4>ISO Certified</h4>
+                        <p>Quality Management System ISO 9001:2015</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🌏</div>
+                        <h4>Global Reach</h4>
+                        <p>Serving clients across multiple countries</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">💪</div>
+                        <h4>Strong Team</h4>
+                        <p>Expert engineers and skilled technicians</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">📈</div>
+                        <h4>Growth</h4>
+                        <p>From 1.5 to 25+ crores annual turnover</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="leadership-section">
+        <div class="container">
+            <h2 class="section-title">Our Leadership</h2>
+            <div class="leaders-grid">
+                <div class="leader-card">
+                    <img src="vishal.JPG" alt="Mr. Vishal S. Sakhale" class="leader-image">
+                    <div class="leader-info">
+                        <h3>Mr. Vishal S. Sakhale</h3>
+                        <h4>Founder & Managing Director</h4>
+                    </div>
+                </div>
+                <div class="leader-card">
+                    <img src="rahul.JPG" alt="Mr. Rahul S. Sakhale" class="leader-image">
+                    <div class="leader-info">
+                        <h3>Mr. Rahul S. Sakhale</h3>
+                        <h4>Director</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="leader-description">
+                <p>Founded by visionary and self-made businessman Mr. Vishal S. Sakhale, who has three decades of business experience, along with his brother Mr. Rahul S. Sakhale, who has two decade's experience in the HVAC industry as well as steel Metal Parts, Control Panel Fabrication, Metal Dies & Punches, Jig Fixtures, Press metal Parts in brass, Copper SS & MS etc.</p>
+                <p>The company has grown from a turnover of INR 1.5 crores in 1996 to INR 25 crores plus in 2020. At the heart of the company's DNA is the vision that healthy economic growth and a healthy environment should go hand in hand. The company has committed itself to a unique work philosophy which stands for Eco-friendliness, Energy Saving & Expertise - three vital principles that guide the company's entire operations.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 Vishal Engineering Works. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
